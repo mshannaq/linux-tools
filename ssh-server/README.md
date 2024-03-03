@@ -21,8 +21,11 @@ ssh-server user@hostname [port]
 On macOS:
 
 ```
+cd ~
+wget https://raw.githubusercontent.com/mshannaq/linux-tools/main/ssh-server/ssh-server
 sudo cp ssh-server /usr/local/bin/ssh-server
 sudo chmod +x /usr/local/bin/ssh-server
+rm ~/ssh-server
 ```
 make sure to edit `~/.zshrc` and make sure you add at the end of file if `/usr/local/bin/` not added into PATH before.
 
