@@ -47,12 +47,22 @@ SSH_KEY_FILE=/path/to/your/ssh/key
 
 Ensure that the configuration file has the correct permissions (`600`).
 
-## Examples
+# Public keys
+
+Make sure you copy the public key into the server using the command `ssh-copy-id`
+
+example:
+```bash
+ssh-copy-id -p <sshport> -i ~/.ssh/<keyfilename>.pub username@server
+```
+
+If you don't have ssh key you can generate a new key using `ssh-keygen` command.
+
+## Examples of using ssh-server command
 
 Connect to a server with the default username (`root`) and port (`22`):
 ```bash
 ssh-server serverhostname
-
 ```
 
 Connect to a server with a specified username (`sam`) and port (`8888`):
