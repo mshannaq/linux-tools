@@ -55,8 +55,7 @@ Then Goto tailscale admin portal and enable the exit node.
 
 Then from your tailscale client you can now select the exit node.
 
-![select exitnode in tailscale client](imgs/select-exitnode-in-tailscale.png)
-
+![Choose exitnode in tailscale](imgs/tailscale-choose-exitnode.png)
 
 For more help please contact us @ [Extendy](https://extendy.net)
 
