@@ -72,9 +72,9 @@ if [ ! -f "$CONFIG_FILE" ]; then
 fi
 
 # Check if configuration file has correct permissions
-FILE_PERMISSIONS=$(ls -l "$CONFIG_FILE" | awk '{print $1}')
-if [ "$FILE_PERMISSIONS" != "-rw-------" ]; then
-    echo "Error: Configuration $CONFIG_FILE file has incorrect permissions. Please set the permissions to 600. using \`chmod 600 $CONFIG_FILE\` "
+PERMISSIONS=$(stat -c "%a" "$CONFIG_FILE")
+if [ "$PERMISSIONS" -ne 600 ]; then
+    echo "Error: Configuration $CONFIG_FILE file has incorrect permissions. Please set the permissions to 600 using: chmod 600 $CONFIG_FILE"
     exit 1
 fi
 
