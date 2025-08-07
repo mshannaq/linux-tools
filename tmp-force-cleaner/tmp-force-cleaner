@@ -1,0 +1,35 @@
+#!/bin/bash
+
+
+# tmp-force-cleaner
+# Deletes files from /tmp that are older than a specified number of hours.
+# Must be run as root.
+# author: Mohammed AlShannaq <mohd@extendy.uk>
+# No version
+
+# ================== CONFIGURATION ==================
+
+# Set cleanup age (in hours)
+CLEANUP_AGE_HOURS=4
+
+# Optional: Log file path
+LOG_FILE="/var/log/tmp-force-cleaner.log"
+
+# ===================================================
+
+# Exit if not run as root
+if [[ $EUID -ne 0 ]]; then
+  echo "This script must be run as root." >&2
+  exit 1
+fi
+
+# Convert hours to minutes
+CLEANUP_AGE_MINUTES=$((CLEANUP_AGE_HOURS * 60))
+
+# Timestamp
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting cleanup (older than $CLEANUP_AGE_HOURS hours)..." >> "$LOG_FILE"
+
+# Run the cleanup
+find /tmp -type f -mmin +$CLEANUP_AGE_MINUTES ! -name '*.sock' ! -name '*.pid' ! -name 'systemd*' -delete >> "$LOG_FILE" 2>&1
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Cleanup finished." >> "$LOG_FILE"
